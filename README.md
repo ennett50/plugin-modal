@@ -1,2 +1,2 @@
-# plugin-modalRW
+# plugin-modal
 simple popup
