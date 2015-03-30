@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple-popup</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+
+
+        <link href="css/simple-popup.css" rel="stylesheet" type="text/css" />
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="js/simple-popup.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+                $('.js-popup').simplePopup();
+            });
+        </script>
+        <style type="text/css">
+
+            .hidden {
+                display: none;
+            }
+            body {min-height: 100%;}
+            html{height: 100%;}
+        </style>
+
+
+    </head>
+    <body>
+        <h1>Пример простого модального окна</h1>
+
+        <button data-id="content-info" class="js-popup">Показать окно в контейнере</button>
+        <div id="content-info" data-width-popup="350" class="hidden">Контайнер на странице</div>
+        <br/>
+        <br/>
+
+
+        <a href="test/test.html" class="js-popup">Показать окно подгрузкой с другой страницы (преимущественно для форм)</a>
+
+
+
+<!-- 
+
+        <div id="js-begin-content-popup">
+            <div class="pop-title">Откликнуться на вакансию</div>
+            <div class="popup">
+              <div class="form">
+                <form method="" action="">
+                  <div class="form-item">
+                    <label>Как вас зовут?</label>
+                    <input type="text">
+                  </div>
+                  <div class="form-item">
+                    <label>Контактный телефон</label>
+                    <input type="text" class="js-phone-mask">
+                  </div>
+                  <div class="form-item error">
+                    <label>E-mail</label>
+                    <input type="text">
+                  </div>
+                  <div class="form-item">
+                    <label>Комментарий</label>
+                    <textarea></textarea>
+                  </div>
+                  <div class="form-item form-files">
+                    <input type="file" id="upload" class="upload" style="visibility:hidden; width:0px;padding:0;margin:0;line-height: 0;position: absolute;"><div style="padding:0px; margin:0px; overflow:hidden; position: relative;"><input type="button" value="Прикрепить резюме"><span id="upload_desc" style="undefined"></span></div>
+                  </div>
+                  <div class="error-msg">Заполнены не все поля</div>
+                  <input type="submit" value="Отправить" class="button button_border">
+                </form>
+              </div>
+            </div>
+          </div>
+
+ -->
+
+
+
+
+
+
+
+
+    </body>
+</html>

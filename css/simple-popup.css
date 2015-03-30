@@ -1,0 +1,92 @@
+.pop {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99999999;
+  overflow: auto;
+  display: none;
+  -webkit-box-sizing: padding-box;
+     -moz-box-sizing: padding-box;
+          box-sizing: padding-box;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+/*background images('pop/bg.png') center center repeat*/
+/*background rgba(140, 152, 153, 0.8)*/
+}
+.pop-bg {
+  -webkit-box-sizing: padding-box;
+     -moz-box-sizing: padding-box;
+          box-sizing: padding-box;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  background: url("../images/pop/bg.png") center center repeat;
+  background: rgba(255,255,255,0.65);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  oveflow: scroll;
+  left: 0;
+}
+.pop-box {
+  position: relative;
+  border: 1px solid #c6c8ca;
+  left: 0;
+  right: 0;
+  top: 100px;
+
+  background: #fff;
+  width: 434px;
+  padding: 25px 40px;
+  margin: auto;
+  -webkit-box-sizing: padding-box;
+     -moz-box-sizing: padding-box;
+          box-sizing: padding-box;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.pop-btn-close {
+  position: absolute;
+  top: 14px;
+  right: 17px;
+  width: 30px;
+  height: 30px;
+  background: #f66;
+  background: url("../images/pop/close-pop.png") center center no-repeat;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+       -o-transition: all 0.2s;
+          transition: all 0.2s;
+  border: 0;
+  outline: 0;
+}
+.pop-title {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  margin-bottom: 20px;
+}
+.pop-locker {
+  position: fixed;
+  left: 0;
+  top: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  overflow-y: scroll;
+}
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../images/preloader.gif") no-repeat center center;
+  z-index: 9999999;
+}
