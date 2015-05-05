@@ -45,9 +45,28 @@
 
 
         },
+        wrapPopup: function (content_visible, data_popup) {
+            content_visible.wrap('<div class="pop js-pop" data-id-container="' + data_popup + '">' +
+            '<div class="pop-box">' +
+                '<div class="popup-content"></div>' +
+            '</div>' +
+        '</div>');
+            containerPopup = $('.js-pop[data-id-container="' + data_popup + '"]');
+            containerPopup.prepend('<div class="pop-bg js-pop-close"></div>');
+            containerPopup.find('.pop-box').prepend('<div class="pop-btn-close js-pop-close"></div>');
+            content_visible.removeClass('hidden');
+
+
+                //
+                //<div class="pop-btn-close js-pop-close"></div>
+
+                
+
+
+        },
         showPopup: function (data_popup, $this, $callback) {
 
-            methods.generatePopup(data_popup);
+            
             var containerPopup = $('.js-pop[data-id-container="' + data_popup + '"]'),
                 $href = $this.attr('href'),
                 $body = $('body'),
@@ -55,11 +74,15 @@
             if ($dop_width) {
                 containerPopup.find('.pop-box').css('width', $dop_width);
             }
+           
             methods.hidePopup();
-
             if ($href) {
-                $body.append('<div class="preloader"></div>');
+               
 
+                methods.generatePopup(data_popup);
+                containerPopup = $('.js-pop[data-id-container="' + data_popup + '"]');
+         
+                $body.append('<div class="preloader"></div>');
                 containerPopup.find('.popup-content').load($href + ' #js-begin-content-popup', function () {
                     $('.preloader').remove();
                     containerPopup.show();
@@ -67,13 +90,26 @@
                 });
 
             } else {
-                var content_visible22 = $this.next('.js-pop-container').clone().html(),
-                    $this_id = $this.attr('data-id'),
-                    content_visible = $this.parents('body').find('#' + $this_id).clone().html();
-                containerPopup.find('.popup-content').append(content_visible);
+                 
+               
+                var $this_id = $this.attr('data-id'),
+                    //content_visible = $this.parents('body').find('#' + $this_id).clone().html();
+                    content_visible = $this.parents('body').find('#' + $this_id);
+
+                methods.wrapPopup(content_visible, data_popup);    
+
+                //content_visible.wrap('<div class="test"></div>');
+
+
+                //containerPopup.find('.popup-content').append(content_visible);
+               // $this.parents('body').find('#' + $this_id).empty();
+                var containerPopup = $('.js-pop[data-id-container="' + data_popup + '"]');
                 containerPopup.show();
+
                 $callback.call($this);
             }
+
+
             var $mainHeight = $(document).outerHeight(),
                 $windowHeight = $(window).outerHeight(),
                 $topPanel = $('.fixed-header').outerHeight(),
@@ -99,13 +135,47 @@
                 if (eventObject.which == 27)
                     methods.hide()
             });
+
+
+
         },
 
         hide: function () {
-            $('.js-pop').hide().remove();
+           
+            jsPop = $('.js-pop');
+
+            id_popCont = jsPop.attr('data-id-container');
+
+
+
+           // data_id_pop = $('[data-id-pop="' +  id_popCont + '"]');
+
+            dataId = $('[data-id-pop="' +  id_popCont + '"]');
+           // console.log(dataId);
+
+            currentPopup = $('#' + dataId.attr('data-id'));
+
+            if (dataId.attr('href') ) {
+                 //console.log(dataId.get(0).tagName);
+                 jsPop.hide().remove();
+            }
+            else {
+                $('.js-pop-close').remove();
+                //console.log(currentPopup)
+                currentPopup.unwrap().unwrap().unwrap().addClass('hidden')
+            }
+
+           
+
+           
             var defaultScrollTop = $('.pop-locker').css('margin-top');
-            var top = (parseFloat(defaultScrollTop.replace('px','')))*-1;
+
+           //var top = (parseFloat(defaultScrollTop.replace('px','')))*-1;
+
+            var top = (parseFloat(defaultScrollTop))*-1;
+
             methods.unwraper($('main'), '.pop-locker');
+
             $(document).scrollTop(top);
 
 

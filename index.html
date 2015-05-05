@@ -26,12 +26,20 @@
             }
             body {min-height: 100%;}
             html{height: 100%;}
+            * {margin:0;padding: 0;}
+            .wrapper-content {
+              width: 980px;
+              margin: 25px auto;
+            }
         </style>
 
 
     </head>
     <body>
+      <main>
+        <div class="wrapper-content">
         <h1>Пример простого модального окна</h1>
+        <br/>
 
         <button data-id="content-info" class="js-popup">Показать окно в контейнере</button>
         <div id="content-info" data-width-popup="350" class="hidden">Контайнер на странице</div>
@@ -81,9 +89,9 @@
 
 
 
+</div>
 
-
-
+</main>
 
     </body>
 </html>
