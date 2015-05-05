@@ -1,6 +1,12 @@
 # plugin-modal
 simple popup
 
+Вызов:
+```js
+$(document).ready(function(){
+    $('.js-popup').simplePopup();
+});
+```
 Два варианта предоставления в контенте:
 1. из контейнера на странице
 2. подгружать контент с другой старницы
@@ -33,18 +39,16 @@ simple popup
 
 ##Параметры
 1. Установка через data-width-popup="350" ширины модального окна
-2. Скрытие окна глобальным методом
 
+2. Скрытие окна глобальным методом
 ```js
 $('.js-popup').simplePopup('hide')
 ```
 3. Обновление содержимого окна
-
 ```js
 $('.js-popup').simplePopup('update','<h2>Hello, world!</h2>')
 ```
 4. Настрйоки - callback
-
 ```js
 var defaults_options = {
     EndCallback: function () {
