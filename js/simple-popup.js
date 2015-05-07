@@ -71,9 +71,9 @@
                 $href = $this.attr('href'),
                 $body = $('body'),
                 $dop_width = $this.attr('data-width-popup');
-            if ($dop_width) {
-                containerPopup.find('.pop-box').css('width', $dop_width);
-            }
+            // if ($dop_width) {
+            //     containerPopup.find('.pop-box').css('width', $dop_width);
+            // }
            
             methods.hidePopup();
             if ($href) {
@@ -81,6 +81,10 @@
 
                 methods.generatePopup(data_popup);
                 containerPopup = $('.js-pop[data-id-container="' + data_popup + '"]');
+                
+                if ($dop_width) {
+                    containerPopup.find('.pop-box').css('width', $dop_width);
+                }
          
                 $body.append('<div class="preloader"></div>');
                 containerPopup.find('.popup-content').load($href + ' #js-begin-content-popup', function () {
@@ -104,6 +108,9 @@
                 //containerPopup.find('.popup-content').append(content_visible);
                // $this.parents('body').find('#' + $this_id).empty();
                 var containerPopup = $('.js-pop[data-id-container="' + data_popup + '"]');
+                if ($dop_width) {
+                    containerPopup.find('.pop-box').css('width', $dop_width);
+                }
                 containerPopup.show();
 
                 $callback.call($this);
