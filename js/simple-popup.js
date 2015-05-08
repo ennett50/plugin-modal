@@ -197,7 +197,7 @@
             })
         },
         update: function (content) {
-            $('.js-pop:visible .popup-content').html(content);
+            $('.js-pop:visible .pop-content').html(content);
         },
         unwraper: function ($this, selector) {
             return $this.each(function () {
