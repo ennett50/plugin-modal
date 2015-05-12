@@ -38,17 +38,17 @@ $(document).ready(function(){
 
 
 ##Параметры
-1. Установка через data-width-popup="350" ширины модального окна
+-Установка через data-width-popup="350" ширины модального окна
 
-2. Скрытие окна глобальным методом
+-Скрытие окна глобальным методом
 ```js
 $('.js-popup').simplePopup('hide')
 ```
-3. Обновление содержимого окна
+-Обновление содержимого окна
 ```js
 $('.js-popup').simplePopup('update','<h2>Hello, world!</h2>')
 ```
-4. Настрйоки - callback
+-Настрйоки - callback
 ```js
 var defaults_options = {
     EndCallback: function () {
