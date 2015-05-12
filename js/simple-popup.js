@@ -27,7 +27,12 @@
                     var $this = $(this),
                         data_popup = $this.attr('data-id-pop');
 
-                    $this.bind("click.simplePopup", function (event) {
+                    // $this.bind("click.simplePopup", function (event) {
+                    //     methods.showPopup(data_popup, $this, options.EndCallback);
+                    //     event.preventDefault();
+                    // });
+
+                    $this.on('click.simplePopup', function (event) {
                         methods.showPopup(data_popup, $this, options.EndCallback);
                         event.preventDefault();
                     });
@@ -197,7 +202,7 @@
             })
         },
         update: function (content) {
-            $('.js-pop:visible .popup-content').html(content);
+            $('.js-pop:visible .pop-content').html(content);
         },
         unwraper: function ($this, selector) {
             return $this.each(function () {
