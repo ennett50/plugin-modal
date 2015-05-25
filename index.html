@@ -17,6 +17,9 @@
 
             $(document).ready(function(){
                 $('.js-popup').simplePopup();
+                $('.hidden-link').replaceWith(function() {
+                  return '<a class="' + $(this).data('class') + '" href="' + $(this).data('link') + '">' + $(this).html() + '</a>';
+                });
             });
         </script>
         <style type="text/css">
@@ -48,6 +51,51 @@
 
 
         <a href="test/test.html" class="js-popup">Показать окно подгрузкой с другой страницы (преимущественно для форм)</a>
+
+
+        <input type="button" value="Задать вопрос" data-id="pop-faq" class="button faq-button js-popup">
+
+<br/>
+        <br/>
+        <br/>
+        <br/>
+        <span data-link="test/test.html" data-class="moduleCatalogLinksItem-link js-popup prevent-link" class="hidden-link moduleCatalogLinksItem-link"  data-width-popup="700">псевдо</span>
+
+
+
+        <div id="pop-faq" class="hidden">
+    <div class="pop-title">Задать вопрос</div>
+      <div class="pop-content">
+        <form action="" class="form adressPop-form">
+          <div class="form-item">
+            <label><i>ФИО</i></label>
+            <input type="text" name="">
+          </div>
+          <div class="form-item">
+            <label><i>Телефон</i></label>
+            <input type="text" name="" placeholder="+7 (___) ___-__-__" class="js-phone-mask">
+          </div>
+          <div class="form-item">
+            <label><i>E-mail*</i></label>
+            <input type="text" name="">
+          </div>
+          <div class="form-item">
+            <label><i>Вопрос</i></label>
+            <textarea name=""></textarea>
+          </div>
+          <div class="form-item">
+            <div class="captcha">
+              <div class="captcha-left"><img src="./images/example/captcha.jpg" alt="" class="captcha-image"></div>
+              <div class="captcha-right">
+                <label class="captcha-label"><i>Введите код подтверждения</i></label>
+                <input type="text" name="">
+              </div>
+            </div>
+          </div>
+          <input type="submit" value="Отправить" class="button _b-big adressPop-form-submit">
+        </form>
+      </div>
+    </div>
 
 
 

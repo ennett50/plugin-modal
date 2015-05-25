@@ -21,49 +21,23 @@
                 return this;
             } else {
                 $(this).data('simplePopup', true);
-                this.each(function (e) {
+
+                return this.each(function (e) {
                     $(this).attr('data-id-pop', 'id_' + (e + 1));
                     var $this = $(this),
                         data_popup = $this.attr('data-id-pop');
+
+                    // $this.bind("click.simplePopup", function (event) {
+                    //     methods.showPopup(data_popup, $this, options.EndCallback);
+                    //     event.preventDefault();
+                    // });
+
+                    $this.on('click.simplePopup', function (event) {
+                        methods.showPopup(data_popup, $this, options.EndCallback);
+                        event.preventDefault();
+                    });
                 });
-
-
-
-                // return this.each(function (e) {
-                //     $(this).attr('data-id-pop', 'id_' + (e + 1));
-                //     var $this = $(this),
-                //         data_popup = $this.attr('data-id-pop');
-
-                //     // $this.bind("click.simplePopup", function (event) {
-                //     //     methods.showPopup(data_popup, $this, options.EndCallback);
-                //     //     event.preventDefault();
-                //     // });
-
-                //     // $this.on('click.simplePopup', function (event) {
-                //     //     methods.showPopup(data_popup, $this, options.EndCallback);
-                //     //     event.preventDefault();
-                //     // });
-
-
-                //     $('body').on('click.simplePopup', $this, function (event) {
-                //         methods.showPopup(data_popup, $this, options.EndCallback);
-                //         console.log($this);
-                //         event.preventDefault();
-                //     });
-
-
-
-                // });
-                return $('body').on('click', '.js-popup', function (e) {
-                 var $this = $(this),
-                     data_popup = $this.attr('data-id-pop');
-
-                    methods.showPopup(data_popup , $this);
-
-                    return false;
-                });
-            };
-            
+            }
         },
 
         generatePopup: function (data_popup) {
@@ -102,10 +76,12 @@
                 $href = $this.attr('href'),
                 $body = $('body'),
                 $dop_width = $this.attr('data-width-popup');
-            
+            // if ($dop_width) {
+            //     containerPopup.find('.pop-box').css('width', $dop_width);
+            // }
            
             methods.hidePopup();
-            if ($href && $href!= "#") {
+            if ($href) {
                
 
                 methods.generatePopup(data_popup);
@@ -119,7 +95,7 @@
                 containerPopup.find('.popup-content').load($href + ' #js-begin-content-popup', function () {
                     $('.preloader').remove();
                     containerPopup.show();
-                   // $callback.call($this);
+                    $callback.call($this);
                 });
                
 
@@ -143,7 +119,7 @@
                 }
                 containerPopup.show();
 
-               // $callback.call($this);
+                $callback.call($this);
             }
 
 
@@ -195,10 +171,8 @@
             if (dataId.attr('href') ) {
                  //console.log(dataId.get(0).tagName);
                  jsPop.hide().remove();
-                 console.log('sdsd');
             }
             else {
-                jsPop.hide();
                 $('.js-pop-close').remove();
                 //console.log(currentPopup)
                 currentPopup.unwrap().unwrap().unwrap().addClass('hidden')
@@ -228,11 +202,9 @@
                 $(window).unbind('.simplePopup');
             })
         },
-        
         update: function (content) {
-            $('.js-pop:visible .popup-content').html(content);
+            $('.js-pop:visible .pop-content').html(content);
         },
-
         unwraper: function ($this, selector) {
             return $this.each(function () {
                 var $that = this,
