@@ -22,9 +22,6 @@
 
                     }
                 });
-                $('.hidden-link').replaceWith(function() {
-                    return '<a class="' + $(this).data('class') + '" href="' + $(this).data('link') + '">' + $(this).html() + '</a>';
-                });
             });
         </script>
         <style type="text/css">
@@ -47,25 +44,34 @@
               height: 55px;
               background: blue;
               color: #fff;
+              width: 980px;
+              margin: 25px auto;
             }
         </style>
 
 
     </head>
     <body>
+
     <header class="js-fixed"><div class="wrapper-content">Текст</div></header>
     <main>
         <div class="wrapper-content">
             <h1>Пример простого модального окна</h1>
             <br/>
 
+      <main>
+        <div class="wrapper-content">
+        <h1>Пример простого модального окна</h1>
+        
+
             <button data-id="content-info" class="js-popup" data-width-popup="650">Показать окно в контейнере</button>
             <div id="content-info" class="hidden">Контайнер на странице</div>
 
 
-<br/>
             <br/>
             <br/>
+            <br/>
+
 
             <a href="#" data-id="content-info1" class="js-popup" data-width-popup="650">Показать окно в контейнере</a>
             <div id="content-info1" class="hidden">Контайнер на странице</div>
@@ -74,6 +80,8 @@
         </div>
 
     </main>
+
+
 
 </body>
 </html>

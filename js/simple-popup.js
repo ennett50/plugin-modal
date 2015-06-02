@@ -3,18 +3,18 @@
  * @uri    https://github.com/ennett50/plugin-modal
  */
 (function($) {
- 
+
     // значени по умолчанию
-    var defaults = { 
+    var defaults = {
 
         width: 800,
-        fixedElements: '.js-fixed', 
+        fixedElements: '.js-fixed',
         onHide: function ($el) {},
         onUpdate: function ($el) {}
 
     };
-    var methods = {},           
-            $el = this;
+    var methods = {},
+        $el = this;
 
     methods.$el = this;
 
@@ -32,7 +32,7 @@
             } else {
                 $(this).data('simplePopup', true);
                 this.each(function (e) {
-                    $(this).attr('data-id-pop', 'id-' + (e + 1));                   
+                    $(this).attr('data-id-pop', 'id-' + (e + 1));
                 });
 
 
@@ -59,10 +59,10 @@
         },
         _wrapPopup: function (contentPop, data_popup) {
             contentPop.wrap('<div class="pop js-pop" data-id-container="' + data_popup + '">' +
-            '<div class="pop-box">' +
+                '<div class="pop-box">' +
                 '<div class="popup-content"></div>' +
-            '</div>' +
-        '</div>');
+                '</div>' +
+                '</div>');
             containerPopup = $('.js-pop[data-id-container="' + data_popup + '"]');
             containerPopup.prepend('<div class="pop-bg js-pop-close"></div>');
             containerPopup.find('.pop-box').prepend('<div class="pop-btn-close js-pop-close"></div>');
@@ -87,14 +87,14 @@
                 containerPopup = $('.js-pop[data-id-container="' + $thisId + '"]');
             var padding = methods._fixBody();
 
-            $('body').css({'padding-right': padding}); 
+            $('body').css({'padding-right': padding});
             var $fixed = $(defaults.fixedElements);
 
             $fixed.css('width', $fixed.outerWidth() - padding);
 
             if ($dopWidth) {
                 containerPopup.find('.pop-box').css('width', $dopWidth);
-            }  
+            }
 
             containerPopup.show();
 
@@ -104,23 +104,23 @@
                 $thisId = $this.attr('data-id-pop'),
                 $conatinerId = $this.attr('data-id') || null,
                 $conatinerVal = $('#' + $conatinerId) || null,
-               
+
                 $dataPopup = $this.attr('data-id'),
                 $hrefVal = $this.attr('href') || null;
 
-                methods._hide();
+            methods._hide();
 
-                if ($hrefVal && $hrefVal !== "#"){
-                   console.log($this.get(0).tagName);
+            if ($hrefVal && $hrefVal !== "#"){
+                console.log($this.get(0).tagName);
 
-                } else {
+            } else {
 
-                    var sectionPop = $this.parents('body').find('#' + $dataPopup);
-                    methods._wrapPopup(sectionPop, $thisId);
-                    methods._isVisible($this);
+                var sectionPop = $this.parents('body').find('#' + $dataPopup);
+                methods._wrapPopup(sectionPop, $thisId);
+                methods._isVisible($this);
 
-                    
-                }
+
+            }
 
         },
 
@@ -144,7 +144,7 @@
                 $hrefVal = $dataIdPopup.attr('href') || null;
 
             if ( $hrefVal && $hrefVal !== "#" ) {
-                 $jsPop.hide().remove();                
+                $jsPop.hide().remove();
             }
             else {
                 $jsPop.hide();
@@ -152,12 +152,12 @@
                 $currentPopup.unwrap().unwrap().unwrap().addClass('hidden');
             }
 
-            $('body').css({'padding-right': '', 'overflow': ''});    
+            $('body').css({'padding-right': '', 'overflow': ''});
             $(defaults.fixedElements).css('width', '');
 
 
         },
-    
+
         reset:function() {
             $(this).css('color', 'black');
         },
@@ -167,7 +167,7 @@
         }
     };
 
-    
+
 
 
 
@@ -188,7 +188,7 @@
             $.error( 'Метод "' +  method + '" не найден в плагине jQuery.simplePopup' );
         }
 
-        
+
 
 
 
