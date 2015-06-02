@@ -6,6 +6,7 @@
   left: 0;
   z-index: 99999999;
   overflow: auto;
+  overflow-y:  scroll;
   display: none;
   -webkit-box-sizing: padding-box;
      -moz-box-sizing: padding-box;
@@ -27,7 +28,7 @@
   background: rgba(255,255,255,0.65);
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: absolute;
   top: 0;
   oveflow: scroll;
   left: 0;

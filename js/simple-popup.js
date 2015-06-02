@@ -1,17 +1,27 @@
-(function ($) {
+/**
+ * @author ennet
+ * @uri    https://github.com/ennett50/plugin-modal
+ */
+(function($) {
+ 
+    // значени по умолчанию
+    var defaults = { 
 
-    // значение по умолчанию
-    var defaults_options = {
-        EndCallback: function () {
-        }
+        width: 800,
+        fixedElements: '.js-fixed', 
+        onHide: function ($el) {},
+        onUpdate: function ($el) {}
+
     };
+    var methods = {},           
+            $el = this;
 
-// наши публичные методы
-    var methods = {
-        // инициализация плагина
-        init: function (params) {
+    methods.$el = this;
+
+    methods = {
+        __init:function(params) {
             // актуальные настройки, будут индивидуальными при каждом запуске
-            var options = $.extend({}, defaults_options, params);
+            var options = $.extend({}, defaults, params);
 
 
             // инициализируем один раз
@@ -21,21 +31,23 @@
                 return this;
             } else {
                 $(this).data('simplePopup', true);
+                this.each(function (e) {
+                    $(this).attr('data-id-pop', 'id-' + (e + 1));                   
+                });
 
-                return this.each(function (e) {
-                    $(this).attr('data-id-pop', 'id_' + (e + 1));
-                    var $this = $(this),
-                        data_popup = $this.attr('data-id-pop');
 
-                    $this.bind("click.simplePopup", function (event) {
-                        methods.showPopup(data_popup, $this, options.EndCallback);
-                        event.preventDefault();
-                    });
+                return this.on("click.simplePopup",function(){
+
+                    methods._show(this);
+
+                    //console.log($el);
+                    return false;
                 });
             }
         },
 
-        generatePopup: function (data_popup) {
+
+        _generatePopup: function (data_popup) {
             $('body').append('<div class="pop js-pop" data-id-container="' + data_popup + '">' +
                 '<div class="pop-bg js-pop-close"></div><div class="pop-box">' +
                 '<div class="pop-btn-close js-pop-close"></div>' +
@@ -45,111 +57,141 @@
 
 
         },
-        showPopup: function (data_popup, $this, $callback) {
+        _wrapPopup: function (contentPop, data_popup) {
+            contentPop.wrap('<div class="pop js-pop" data-id-container="' + data_popup + '">' +
+            '<div class="pop-box">' +
+                '<div class="popup-content"></div>' +
+            '</div>' +
+        '</div>');
+            containerPopup = $('.js-pop[data-id-container="' + data_popup + '"]');
+            containerPopup.prepend('<div class="pop-bg js-pop-close"></div>');
+            containerPopup.find('.pop-box').prepend('<div class="pop-btn-close js-pop-close"></div>');
+            contentPop.removeClass('hidden');
+        },
 
-            methods.generatePopup(data_popup);
-            var containerPopup = $('.js-pop[data-id-container="' + data_popup + '"]'),
-                $href = $this.attr('href'),
-                $body = $('body'),
-                $dop_width = $this.attr('data-width-popup');
-            if ($dop_width) {
-                containerPopup.find('.pop-box').css('width', $dop_width);
-            }
-            methods.hidePopup();
+        _fixBody : function($this){
+            var $body = $('body');
+            $body.css({'overflow': 'auto'});
 
-            if ($href) {
-                $body.append('<div class="preloader"></div>');
+            var $beforePadding = $body.outerWidth();
+            $body.css({'overflow': 'hidden'});
 
-                containerPopup.find('.popup-content').load($href + ' #js-begin-content-popup', function () {
-                    $('.preloader').remove();
-                    containerPopup.show();
-                    $callback.call($this);
-                });
+            var $isPadding = $body.outerWidth() - $beforePadding;
+            return $isPadding;
+        },
 
-            } else {
-                var content_visible22 = $this.next('.js-pop-container').clone().html(),
-                    $this_id = $this.attr('data-id'),
-                    content_visible = $this.parents('body').find('#' + $this_id).clone().html();
-                containerPopup.find('.popup-content').append(content_visible);
-                containerPopup.show();
-                $callback.call($this);
-            }
-            var $mainHeight = $(document).outerHeight(),
-                $windowHeight = $(window).outerHeight(),
-                $topPanel = $('.fixed-header').outerHeight(),
-                $scrollTop = $(document).scrollTop();
-            $("main").wrapInner("<div class='pop-locker' />");
-            var $popLocker = $('.pop-locker');
+        _isVisible: function($this){
+            var $this = $($this),
+                $thisId = $this.attr('data-id-pop'),
+                $dopWidth = $this.attr('data-width-popup'),
+                containerPopup = $('.js-pop[data-id-container="' + $thisId + '"]');
+            var padding = methods._fixBody();
 
+            $('body').css({'padding-right': padding}); 
+            var $fixed = $(defaults.fixedElements);
 
-            $popLocker.css({
-                'height': $mainHeight,
-                'padding-top': $topPanel,
-                'margin-top': -$scrollTop
-            });
-            if ($mainHeight == $windowHeight) $popLocker.css('overflow', 'auto');
+            $fixed.css('width', $fixed.outerWidth() - padding);
 
+            if ($dopWidth) {
+                containerPopup.find('.pop-box').css('width', $dopWidth);
+            }  
+
+            containerPopup.show();
 
         },
-        hidePopup: function () {
+        _show : function($this){
+            var $this = $($this),
+                $thisId = $this.attr('data-id-pop'),
+                $conatinerId = $this.attr('data-id') || null,
+                $conatinerVal = $('#' + $conatinerId) || null,
+               
+                $dataPopup = $this.attr('data-id'),
+                $hrefVal = $this.attr('href') || null;
+
+                methods._hide();
+
+                if ($hrefVal && $hrefVal !== "#"){
+                   console.log($this.get(0).tagName);
+
+                } else {
+
+                    var sectionPop = $this.parents('body').find('#' + $dataPopup);
+                    methods._wrapPopup(sectionPop, $thisId);
+                    methods._isVisible($this);
+
+                    
+                }
+
+        },
+
+        _hide : function() {
             $('body').on('click', '.js-pop-close', function () {
-                methods.hide()
+                methods.onHide();
             });
             $(document).keydown(function (eventObject) {
                 if (eventObject.which == 27)
-                    methods.hide()
+                    methods.onHide();
             });
-        },
-
-        hide: function () {
-            $('.js-pop').hide().remove();
-            var defaultScrollTop = $('.pop-locker').css('margin-top');
-            var top = (parseFloat(defaultScrollTop.replace('px','')))*-1;
-            methods.unwraper($('main'), '.pop-locker');
-            $(document).scrollTop(top);
-
 
 
         },
 
-        destroy: function () {
-//            methods.reset.apply(this);
-            //удаляются все обработчики событий
-            return this.each(function () {
-                $(window).unbind('.simplePopup');
-            })
+        onHide : function(){
+            var $jsPop = $('.js-pop'),
+                $containerPopup = $jsPop.attr('data-id-container'),
+                $dataIdPopup = $('[data-id-pop="' +  $containerPopup + '"]'),
+                $currentPopup = $('#' + $dataIdPopup.attr('data-id')),
+                $hrefVal = $dataIdPopup.attr('href') || null;
+
+            if ( $hrefVal && $hrefVal !== "#" ) {
+                 $jsPop.hide().remove();                
+            }
+            else {
+                $jsPop.hide();
+                $('.js-pop-close').remove();
+                $currentPopup.unwrap().unwrap().unwrap().addClass('hidden');
+            }
+
+            $('body').css({'padding-right': '', 'overflow': ''});    
+            $(defaults.fixedElements).css('width', '');
+
+
         },
-        update: function (content) {
-            $('.js-pop:visible .popup-content').html(content);
+    
+        reset:function() {
+            $(this).css('color', 'black');
         },
-        unwraper: function ($this, selector) {
-            return $this.each(function () {
-                var $that = this,
-                    $selector = (typeof selector !== 'undefined') ? $($that).find(selector) : $($that).children().first();
-                if ($selector.length === 1) {
-                    $selector.contents().appendTo($that);
-                    $selector.remove();
-                }
-            });
+        destroy:function() {
+            methods.reset.apply(this);
+            $(this).unbind(".simplePopup");
         }
-
     };
 
+    
 
-    $.fn.simplePopup = function (method) {
-        var $body = $('body');
-        // если запрашиваемый метод существует, мы его вызываем
-        // все параметры, кроме имени метода прийдут в метод
-        // this так же перекочует в метод
-        if (methods[method]) {
-            return methods[ method ].apply(this, Array.prototype.slice.call(arguments, 1));
-        } else if (typeof method === 'object' || !method) {
+
+
+    $.fn.simplePopup = function(method){
+
+        // немного магии
+        if ( methods[method] ) {
+            // если запрашиваемый метод существует, мы его вызываем
+            // все параметры, кроме имени метода прийдут в метод
+            // this так же перекочует в метод
+            return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+        } else if ( typeof method === 'object' || ! method ) {
             // если первым параметром идет объект, либо совсем пусто
             // выполняем метод init
-            return methods.init.apply(this, arguments);
+            return methods.__init.apply( this, arguments );
         } else {
             // если ничего не получилось
-            $.error('Метод с именем ' + method + ' не существует для jQuery.simplePopup');
+            $.error( 'Метод "' +  method + '" не найден в плагине jQuery.simplePopup' );
         }
+
+        
+
+
+
+        //return this;
     };
 })(jQuery);

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple-popup</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+
+
+
+        <link href="css/simple-popup.css" rel="stylesheet" type="text/css" />
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="js/simple-popup.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+                $('.js-popup').simplePopup({
+                  EndCallback: function () {
+                    alert('dd');
+
+                  }
+                });
+                $('.hidden-link').replaceWith(function() {
+                  return '<a class="' + $(this).data('class') + '" href="' + $(this).data('link') + '">' + $(this).html() + '</a>';
+                });
+            });
+        </script>
+        <style type="text/css">
+
+            .hidden {
+                display: none;
+            }
+            body {min-height: 100%;}
+            html{height: 100%;}
+            * {margin:0;padding: 0;}
+            .wrapper-content {
+              width: 980px;
+              margin: 25px auto;
+            }
+        </style>
+
+
+    </head>
+    <body>
+      <main>
+        <div class="wrapper-content">
+        <h1>Пример простого модального окна</h1>
+        <br/>
+
+        <button data-id="content-info" class="js-popup" data-width-popup="650">Показать окно в контейнере</button>
+       
+        <br/>
+        <br/>
+
+
+        <a href="test/test.html" class="js-popup">Показать окно подгрузкой с другой страницы (преимущественно для форм)</a>
+
+
+        <input type="button" value="Задать вопрос" data-id="pop-faq" class="button faq-button js-popup">
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <span data-link="test/test.html" data-class="moduleCatalogLinksItem-link js-popup prevent-link" class="hidden-link moduleCatalogLinksItem-link"  data-width-popup="700">псевдо</span>
+
+ <div id="content-info" data-width-popup="350" class="hidden">Контайнер на странице</div>
+
+        <div id="pop-faq" class="hidden">
+    <div class="pop-title">Задать вопрос</div>
+      <div class="pop-content">
+        <form action="" class="form adressPop-form">
+          <div class="form-item">
+            <label><i>ФИО</i></label>
+            <input type="text" name="">
+          </div>
+          <div class="form-item">
+            <label><i>Телефон</i></label>
+            <input type="text" name="" placeholder="+7 (___) ___-__-__" class="js-phone-mask">
+          </div>
+          <div class="form-item">
+            <label><i>E-mail*</i></label>
+            <input type="text" name="">
+          </div>
+          <div class="form-item">
+            <label><i>Вопрос</i></label>
+            <textarea name=""></textarea>
+          </div>
+          <div class="form-item">
+            <div class="captcha">
+              <div class="captcha-left"><img src="./images/example/captcha.jpg" alt="" class="captcha-image"></div>
+              <div class="captcha-right">
+                <label class="captcha-label"><i>Введите код подтверждения</i></label>
+                <input type="text" name="">
+              </div>
+            </div>
+          </div>
+          <input type="submit" value="Отправить" class="button _b-big adressPop-form-submit">
+        </form>
+      </div>
+    </div>
+
+
+
+<!-- 
+
+        <div id="js-begin-content-popup">
+            <div class="pop-title">Откликнуться на вакансию</div>
+            <div class="popup">
+              <div class="form">
+                <form method="" action="">
+                  <div class="form-item">
+                    <label>Как вас зовут?</label>
+                    <input type="text">
+                  </div>
+                  <div class="form-item">
+                    <label>Контактный телефон</label>
+                    <input type="text" class="js-phone-mask">
+                  </div>
+                  <div class="form-item error">
+                    <label>E-mail</label>
+                    <input type="text">
+                  </div>
+                  <div class="form-item">
+                    <label>Комментарий</label>
+                    <textarea></textarea>
+                  </div>
+                  <div class="form-item form-files">
+                    <input type="file" id="upload" class="upload" style="visibility:hidden; width:0px;padding:0;margin:0;line-height: 0;position: absolute;"><div style="padding:0px; margin:0px; overflow:hidden; position: relative;"><input type="button" value="Прикрепить резюме"><span id="upload_desc" style="undefined"></span></div>
+                  </div>
+                  <div class="error-msg">Заполнены не все поля</div>
+                  <input type="submit" value="Отправить" class="button button_border">
+                </form>
+              </div>
+            </div>
+          </div>
+
+ -->
+
+
+
+
+</div>
+
+</main>
+
+    </body>
+</html>

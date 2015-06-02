@@ -15,8 +15,16 @@
         <script src="js/simple-popup.js"></script>
         <script type="text/javascript">
 
-            $(document).ready(function(){
-                $('.js-popup').simplePopup();
+            $(document).ready(function() {
+                $('.js-popup').simplePopup({
+                    EndCallback: function() {
+                        alert('dd');
+
+                    }
+                });
+                $('.hidden-link').replaceWith(function() {
+                    return '<a class="' + $(this).data('class') + '" href="' + $(this).data('link') + '">' + $(this).html() + '</a>';
+                });
             });
         </script>
         <style type="text/css">
@@ -24,66 +32,48 @@
             .hidden {
                 display: none;
             }
-            body {min-height: 100%;}
+            body {min-height: 100%; padding-top: 80px}
             html{height: 100%;}
+            * {margin:0;padding: 0;}
+            .wrapper-content {
+                width: 980px;
+                margin: 25px auto;
+            }
+            header {
+              position: fixed;
+              top: 0;;
+              left: 0;
+              width: 100%;
+              height: 55px;
+              background: blue;
+              color: #fff;
+            }
         </style>
 
 
     </head>
     <body>
-        <h1>Пример простого модального окна</h1>
+    <header class="js-fixed"><div class="wrapper-content">Текст</div></header>
+    <main>
+        <div class="wrapper-content">
+            <h1>Пример простого модального окна</h1>
+            <br/>
 
-        <button data-id="content-info" class="js-popup">Показать окно в контейнере</button>
-        <div id="content-info" data-width-popup="350" class="hidden">Контайнер на странице</div>
-        <br/>
-        <br/>
-
-
-        <a href="test/test.html" class="js-popup">Показать окно подгрузкой с другой страницы (преимущественно для форм)</a>
-
+            <button data-id="content-info" class="js-popup" data-width-popup="650">Показать окно в контейнере</button>
+            <div id="content-info" class="hidden">Контайнер на странице</div>
 
 
-<!-- 
+<br/>
+            <br/>
+            <br/>
 
-        <div id="js-begin-content-popup">
-            <div class="pop-title">Откликнуться на вакансию</div>
-            <div class="popup">
-              <div class="form">
-                <form method="" action="">
-                  <div class="form-item">
-                    <label>Как вас зовут?</label>
-                    <input type="text">
-                  </div>
-                  <div class="form-item">
-                    <label>Контактный телефон</label>
-                    <input type="text" class="js-phone-mask">
-                  </div>
-                  <div class="form-item error">
-                    <label>E-mail</label>
-                    <input type="text">
-                  </div>
-                  <div class="form-item">
-                    <label>Комментарий</label>
-                    <textarea></textarea>
-                  </div>
-                  <div class="form-item form-files">
-                    <input type="file" id="upload" class="upload" style="visibility:hidden; width:0px;padding:0;margin:0;line-height: 0;position: absolute;"><div style="padding:0px; margin:0px; overflow:hidden; position: relative;"><input type="button" value="Прикрепить резюме"><span id="upload_desc" style="undefined"></span></div>
-                  </div>
-                  <div class="error-msg">Заполнены не все поля</div>
-                  <input type="submit" value="Отправить" class="button button_border">
-                </form>
-              </div>
-            </div>
-          </div>
-
- -->
+            <a href="#" data-id="content-info1" class="js-popup" data-width-popup="650">Показать окно в контейнере</a>
+            <div id="content-info1" class="hidden">Контайнер на странице</div>
 
 
+        </div>
 
+    </main>
 
-
-
-
-
-    </body>
+</body>
 </html>
