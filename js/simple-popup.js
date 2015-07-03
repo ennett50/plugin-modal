@@ -7,8 +7,6 @@
     // значени по умолчанию
     var defaults = {
         fixedElements: '.js-fixed',
-        // onHide: function ($el) {},
-        // onUpdate: function ($el) {},
         afterLoader: function($el){}
 
     };
