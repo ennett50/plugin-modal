@@ -41,9 +41,10 @@ $(document).ready(function(){
 
 ##Дополнительные параметры
 *Установка через `data-width-popup="350"` ширины модального окна (не рекомендуется)
+
 *Скрытие окна глобальным методом
 ```js
-$('.js-popup').simplePopup('onhide')
+$('.js-popup').simplePopup('onHide')
 ```
 *Обновление содержимого окна
 ```js
