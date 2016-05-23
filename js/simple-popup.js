@@ -108,7 +108,7 @@
                currentFunction = eval($dopFunction);              
             }
 
-            containerPopup.show();   
+            containerPopup.fadeIn();
 
 
         },
@@ -166,10 +166,10 @@
                 $hrefVal = $dataIdPopup.attr('href') || null;
 
             if ( $hrefVal && $hrefVal !== "#" ) {
-                $jsPop.hide().remove();
+                $jsPop.fadeOut().remove();
             }
             else {
-                $jsPop.hide();
+                $jsPop.fadeOut();
                 $('.js-pop-close').remove();
                 $currentPopup.unwrap().unwrap().unwrap().addClass('hidden');
             }
