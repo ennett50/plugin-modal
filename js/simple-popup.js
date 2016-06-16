@@ -32,11 +32,13 @@
                     $(this).attr('data-id-pop', 'id-' + (e + 1));
                 });
 
+                var $btn = this;
 
-                return this.on("click.simplePopup",function(){
 
-                    methods._show(this);
-                    options.afterLoader.call(this)
+               // return this.on("click.simplePopup", function(event){
+                return $('.opinions').on("click.simplePopup", '.js-popup', function(event){
+                    methods._show(event.target);
+                    options.afterLoader.call(event.target);
                     return false;
                 });
             }
@@ -108,7 +110,7 @@
                currentFunction = eval($dopFunction);              
             }
 
-            containerPopup.fadeIn();
+            containerPopup.fadeIn(500);
 
 
         },
@@ -125,7 +127,9 @@
             methods._hide();
 
             if ($hrefVal && $hrefVal !== "#"){
+
                 methods._generatePopup($thisId);
+
                 var containerPopup = $('.js-pop[data-id-container="' + $thisId + '"]').find('.popup-content');
 
                 $body.append('<div class="preloader"></div>');                
@@ -166,10 +170,10 @@
                 $hrefVal = $dataIdPopup.attr('href') || null;
 
             if ( $hrefVal && $hrefVal !== "#" ) {
-                $jsPop.fadeOut().remove();
+                $jsPop.fadeOut(500).remove();
             }
             else {
-                $jsPop.fadeOut();
+                $jsPop.fadeOut(500);
                 $('.js-pop-close').remove();
                 $currentPopup.unwrap().unwrap().unwrap().addClass('hidden');
             }
