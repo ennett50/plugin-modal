@@ -36,7 +36,7 @@
 
 
                // return this.on("click.simplePopup", function(event){
-                return $('.opinions').on("click.simplePopup", '.js-popup', function(event){
+                return $('body').on("click.simplePopup", '.js-popup', function(event){
                     methods._show(event.target);
                     options.afterLoader.call(event.target);
                     return false;
